@@ -17,7 +17,7 @@ class Base(Model):
         abstract = True
     
     # Translators:  Used wherever a created time stamp is needed.                   
-    created     = DateTimeField(editable=True)
+    created     = DateTimeField(editable=False)
     
     # Translators: Used wherever an update time stamp is needed.
     updated     = DateTimeField(editable=False)
@@ -84,7 +84,6 @@ class Content(Base):
     vimeos       = ManyToManyField(Vimeo, blank=True, null=True)
     documents    = ManyToManyField(Document, blank=True, null=True)
     source_link  = URLField(blank=True, null=True)
-    is_displayed = BooleanField(default=True)
 
     objects = ContentManager()
 
@@ -111,6 +110,11 @@ class Content(Base):
     def gallery_items_count(self):
         return len(self.gallery_items())
         
+class Group(Base):
+    """
+    """
+    name  = CharField(max_length=140, null=False, blank=False)
+
 
 class Project(Content):
     """
@@ -118,14 +122,16 @@ class Project(Content):
     class Meta:
         ordering = ['position',]
 
-    position     = PositiveSmallIntegerField(default=0)
-    year         = DateField()
-    project_time = CharField(max_length=140, blank=True, null=True) 
-    medium       = CharField(max_length=255, blank=True, null=True)
-    credits      = TextField(blank=True, null=True)
-    parent       = ForeignKey('self', null=True, blank=True)
-    project_link = URLField(blank=True, null=True)
-    tags         = TaggableManager()
+    position         = PositiveSmallIntegerField(default=0)
+    project_time     = CharField(max_length=140, blank=True, null=True) 
+    medium           = CharField(max_length=255, blank=True, null=True)
+    material         = CharField(max_length=255, blank=True, null=True)
+    dimensions       = CharField(max_length=255, blank=True, null=True)
+    credits          = TextField(blank=True, null=True)
+    project_link     = URLField(blank=True, null=True)
+    groups           = ManyToManyField(Group, blank=True, null=True)
+    tags             = TaggableManager(blank=True)
+    related_projects = ManyToManyField('self', blank=True, null=True)
 
 
 class Post(Content):

@@ -32,11 +32,7 @@ def tagged_projects(request, slug=None):
     """
     tag = get_object_or_404(Tag, slug=slug)
     
-    print tag
-    
     projects = Project.objects.filter(tags__name__in=[tag.name,])
-    
-    print projects
     
     return render_to_response('tagged_projects.html', {
             'tagged_projects' : projects,

@@ -19,26 +19,22 @@ class ProjectAdmin(BaseAdmin):
     """
     """
     class Media:
-        js = [
-                settings.STATIC_URL + 'tiny_mce/tiny_mce.js', 
-                settings.STATIC_URL + 'js/tinyMCE_admin.js',
-              ]
         widgets = {
                 'credits': Textarea,
                 }              
             
     fieldsets = (
         ('Info', {
-            'fields': ('name', 'parent', 'content', 'slug', 'year', 'project_time', 'project_link', 'source_link', 'medium', 'credits', 'position', 'is_displayed', 'is_active')
+            'fields': ('name', 'slug', 'groups', 'content', 'medium', 'project_time', 'material', 'dimensions', 'project_link', 'source_link', 'credits', 'position', 'is_active')
         }),
         ('Meta', {
-            'fields': ('tags',)
+            'fields': ('tags', 'related_projects')
         }),        
         ('Media', {
             'fields': ('images', 'sounds', 'videos', 'vimeos', 'documents')
         }),     
     )
-    list_display        = ('name', 'parent', 'position', 'is_active') 
+    list_display        = ('name', 'position', 'is_active') 
     list_editable       = ('position', 'is_active',)
     prepopulated_fields = {'slug': ('name',)}
 
@@ -48,14 +44,14 @@ class PostAdmin(BaseAdmin):
     """
     fieldsets    = (
         ('Info', {
-            'fields': ('name', 'content', 'slug', 'source_link', 'projects', 'created', 'is_active')
+            'fields': ('name', 'content', 'slug', 'source_link', 'projects', 'is_active')
         }),
         ('Media', {
             'fields': ('images', 'sounds', 'videos', 'vimeos', 'documents')
         }),
     )
-    list_display        = ('name', 'created', 'is_active') 
-    list_editable       = ('created', 'is_active',)    
+    list_display        = ('name', 'is_active') 
+    list_editable       = ('is_active',)    
     prepopulated_fields = {'slug': ('name',)}
              
 
@@ -66,5 +62,6 @@ admin.site.register(Sound)
 admin.site.register(Document)
 admin.site.register(Video)
 admin.site.register(Vimeo)
+admin.site.register(Group)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Post, PostAdmin)

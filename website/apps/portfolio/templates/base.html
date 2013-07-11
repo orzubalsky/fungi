@@ -1,59 +1,74 @@
-{% load flatpages %}
-{% get_flatpages as flatpages %}
 <!DOCTYPE html>
 <html lang='en'>
 <head>
-    <title>{% block title %}or zubalsky{% endblock title %}</title>
+    <title>{% block title %}phuong{% endblock title %}</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Or Zubalsky is a programmer, artist, musician, and collaborator. He is a lover of sound, listening, collaboration, open source, questions, language, exchange, and low technology." />
-    <meta name="keywords" content="or zubalsky, fantastic futures, sound, collaboration, exchange, listening, performance, django, jquery, arduino, max/msp, physical computing" />
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/interactions.css" />    
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>    
     {% block extra_css %}{% endblock %}
 </head>
 <body>
-    <div id="container">
-        {% url 'info' as info_url %}
-        {% url 'post-list' as news_url %}
-        {% url 'project-list' as projects_url %}        
-       
-        <div id="header" class="col_2">
-            <h1 id="title"><a href="{% url 'home' %}">OR ZUBALSKY</a></h1>
-            {% block navigation %}
-            <div id="navigation">
-                <a class="circle" id="shrimp" href="{% url 'home' %}" title="hello circle">hi!</a>
-                <div id="menu">
-                    <a href="{{ info_url }}" {% if request.path == info_url %} class="active"{% endif %}>Info</a> -- 
-                    <a href="{{ news_url }}" {% if request.path == news_url %} class="active"{% endif %}>News</a> ---- 
-                    {% for project in projects %}
-                        {% url 'project-detail' slug=project.slug as project_url %}
-                        <a href="{{ project_url }}" {% if request.path == project_url %} class="active"{% endif %}>{{ project.name }}</a>{% if not forloop.last %} -- {% endif %}
-                    {% endfor %}
-                </div>
+    <body>
+        <div id="container">
+            <div id="header">
+                <a href="">
+                    <h1>Phuong Nguyen</h1>
+                </a>
             </div>
-            {% endblock navigation %}
-        </div>
-        
-        <div id="main">
-            {% block content %}
-            {% endblock %}
-        </div>
-    </div>
-    <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.js"></script>	
-    <script type="text/javascript" src="{{ STATIC_URL }}js/interactions.js"></script>    
-    <script type="text/javascript" src="{{ STATIC_URL }}js/site.js"></script>
-    {% if settings.GOOGLE_ANALYTICS_KEY %}
-    <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', {{settings.GOOGLE_ANALYTICS_KEY}}, 'orzubalsky.com');
-      ga('send', 'pageview');
+           <div id="content">
+               {% block content %}               
+                <div id="gallery">
+                    <img src="{{ STATIC_URL }}images/2_threadscopy-copy.jpg">
+                </div>
+                <div id="gallery-nav">
+                    back   forth
+                    </div>
+                <div id="post-title">
+                    <h2>{{ project.name }}</h2>
+                    <p>
+                        {{ project.medium }}, {{ project.project_time }}.<br />
+                        {{ project.material }}<br />
+                        {{ project.dimensions }}
+                    </p>
+                </div>
+                <div id ="post-content">
+                    {{ project.content|safe }}
+                </div>
+                {% if project.related_projects.all %}
+                <div id ="related-posts">
+                    <h3>correlated with:</h3>
+                    {% for related_project in project.related_projects.all %}
+                    <a href="">{{ related_project.name }}</a>
+                    {% endfor %}
+                </div> 
+                {% endif %}                
+                {% endblock content %}                
+            </div>
 
-    </script>    
-    {% endif %}    
-    {% block extra_js %}{% endblock %}	
-</body>
+            <div id="navigation">
+                <a href="">home</a><br />
+                <a href="">statement</a><br />
+                <a href="">bio & contact</a><br />
+                {{ settings.GOOGLE_ANALYTICS_KEY }}
+            </div>
+        </div>        
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="interaction.js"></script>
+        {% if settings.GOOGLE_ANALYTICS_KEY %}
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+          ga('create', {{settings.GOOGLE_ANALYTICS_KEY}}, 'orzubalsky.com');
+          ga('send', 'pageview');
+
+        </script>    
+        {% endif %}    
+        {% block extra_js %}{% endblock %}	
+    </body>
 </html>
