@@ -85,7 +85,17 @@ strong {
 .gallery .list img {
     width: 800px;
 }
-
+.gallery .thumbnails {
+    
+}
+.gallery .thumbnails .item {
+    height: 100px;
+    margin: 0 20px 20px 0;
+    float: left;    
+}
+.gallery .thumbnails img {
+    height: 100%;
+}
 #content {
     width:800px;
     text-align:left;
@@ -96,6 +106,7 @@ strong {
     width: 400px;
     height:300px;
     float:left;
+    clear: both;
 }
 
 #post-content p {
