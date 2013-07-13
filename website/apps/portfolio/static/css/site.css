@@ -137,3 +137,6 @@ h3 {
 }
 #navigation a {
 }
+a.highlight {
+    text-transform: uppercase;
+}

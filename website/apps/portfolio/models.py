@@ -133,6 +133,9 @@ class Project(Content):
     groups           = ManyToManyField(Group, blank=True, null=True)
     tags             = TaggableManager(blank=True)
     related_projects = ManyToManyField('self', blank=True, null=True)
+    
+    def tag_class_list(self):
+        return " ".join(["%s" % (t.name) for t in self.tags.all()])
 
 
 class Post(Content):

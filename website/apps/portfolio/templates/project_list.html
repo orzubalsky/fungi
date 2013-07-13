@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
-{% block content %}
+{% block tag_navigation %}
 {% for tag in navigation_tagbag.tags.all %}
-    <a href="tag_{{ tag.name }}">{{ tag.name }}</a>
+    <a href="{{ tag.name }}" id="{{ tag.name }}">{{ tag.name }}</a>
 {% endfor %}
 {% endblock %}
+
+{% block content %}
+<div id="project_list">
+{% for project in projects %}
+    <a href="" class="{{ project.tag_class_list }}">{{ project.name }}</a>
+{% endfor %}
+</div>
+{% endblock content %}
