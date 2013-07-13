@@ -36,8 +36,8 @@
 
 {% block navigation %}
 <div id="navigation">
-    <a href="">home</a><br />
-    <a href="">statement</a><br />
-    <a href="">bio & contact</a><br />
+    <a href="{% url 'project-list' %}">home</a><br />
+    <a href="{% url 'statement' %}">statement</a><br />
+    <a href="{% url 'bio' %}">bio & contact</a><br />
 </div>
 {% endblock navigation %}
