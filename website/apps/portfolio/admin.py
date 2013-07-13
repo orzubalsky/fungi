@@ -38,7 +38,7 @@ class ProjectAdmin(BaseAdmin):
             'fields': ('name', 'slug', 'groups', 'content', 'medium', 'project_time', 'material', 'dimensions', 'project_link', 'source_link', 'credits', 'position', 'is_active')
         }),
         ('Meta', {
-            'fields': ('tags', 'related_projects', 'gallery_style')
+            'fields': ('gallery_style', 'tags', 'related_projects')
         }),        
         ('Media', {
             'fields': ('images', 'sounds', 'videos', 'vimeos', 'documents')
