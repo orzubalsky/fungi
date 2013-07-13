@@ -5,12 +5,23 @@
 {% block title %}{{ block.super|title }} -- {{ project.name|title }}{% endblock title %}
 
 {% block content %}
-<div id="gallery">
-    <img src="{{ STATIC_URL }}images/2_threadscopy-copy.jpg">
-</div>
-<div id="gallery-nav">
-    back   forth
+
+<div class="gallery">
+    {% for vimeo in project.vimeos.all %}
+        <div class="item">{{ vimeo.media|safe }}</div>
+    {% endfor %}
+    {% for image in project.images.all %}
+        <div class="item"><img src="{{ image.media.url }}" alt="{{ project.name }}: {{ image.media.name }}" /></div>
+    {% endfor %}
+    {% if project.gallery_items_count > 1 %}
+    <div class="controls">
+        {% url 'project-detail' slug=project.slug as project_url %}                
+        <a class="back" href="{{ project_url }}">back</a>
+        <a class="next" href="{{ project_url }}">forth</a>
     </div>
+    {% endif %}            
+</div>
+
 <div id="post-title">
     <h2>{{ project.name }}</h2>
     <p>

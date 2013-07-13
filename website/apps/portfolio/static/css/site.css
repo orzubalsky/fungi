@@ -49,19 +49,29 @@ strong {
     margin: 32px 32px;
     background-color: transparent;
 }
-
-#gallery {
-    width:800px;
+.gallery {
+    width: 800px;   
+    margin-bottom:32px;
+    position: relative;
+    height: 500px;
 }
-
-#gallery img {
-    width:800px;
+.gallery .item {
+    display: none;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    width: 800px;
 }
-
-#gallery-nav {
+.gallery .item img {
+    width: 100%;
+    position: absolute;
+}
+.gallery .controls a {
+    border-bottom: none;
+}
+.gallery .controls {
     width:800px;
     text-align:right;
-    margin-bottom:32px;
 }
 
 #content {
