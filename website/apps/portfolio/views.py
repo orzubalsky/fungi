@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from django.views.generic import ListView, DetailView
 from django.shortcuts import render_to_response, get_object_or_404
 from django.template import RequestContext
@@ -26,6 +25,13 @@ class ProjectDetail(DetailView):
     """
     model = Project
     template_name = 'project_detail.html'
+
+
+class ProjectList(ListView):
+    """
+    """
+    queryset = Project.objects.filter(is_active=True)
+    template_name = 'project_list.html'
 
 
 def tagged_projects(request, slug=None):

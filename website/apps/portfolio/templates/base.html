@@ -6,7 +6,7 @@
     <meta name="description" content="" />
     <meta name="keywords" content="" />
     <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/site.css" />
-    <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>    
+    {# <link href='http://fonts.googleapis.com/css?family=Inconsolata:400,700' rel='stylesheet' type='text/css'>     #}
     {% block extra_css %}{% endblock %}
     
     {% if GOOGLE_ANALYTICS_KEY %}
@@ -16,7 +16,7 @@
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      ga('create', '{{ GOOGLE_ANALYTICS_KEY}}', 'orzubalsky.com');
+      ga('create', '{{ GOOGLE_ANALYTICS_KEY }}', 'orzubalsky.com');
       ga('send', 'pageview');
 
     </script>    
@@ -32,42 +32,12 @@
             </div>
 
            <div id="content">
-               {% block content %}               
-                <div id="gallery">
-                    <img src="{{ STATIC_URL }}images/2_threadscopy-copy.jpg">
-                </div>
-                <div id="gallery-nav">
-                    back   forth
-                    </div>
-                <div id="post-title">
-                    <h2>{{ project.name }}</h2>
-                    <p>
-                        {{ project.medium }}, {{ project.project_time }}.<br />
-                        {{ project.material }}<br />
-                        {{ project.dimensions }}
-                    </p>
-                </div>
-                <div id ="post-content">
-                    {{ project.content|safe }}
-                </div>
-                {% if project.related_projects.all %}
-                <div id ="related-posts">
-                    <h3>correlated with:</h3>
-                    {% for related_project in project.related_projects.all %}
-                    <a href="">{{ related_project.name }}</a>
-                    {% endfor %}
-                </div> 
-                {% endif %}                
-                {% endblock content %}                
+               {% block content %}
+                {% endblock content %}
             </div>
-
-            <div id="navigation">
-                <a href="">home</a><br />
-                <a href="">statement</a><br />
-                <a href="">bio & contact</a><br />
-                {{ settings.GOOGLE_ANALYTICS_KEY }}
-            </div>
-            {% endblock navigation %}
+            
+            {% block navigation %}
+            {% endblock navigation %}            
         </div>        
     </div>
     <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.js"></script>	

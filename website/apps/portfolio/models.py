@@ -5,7 +5,8 @@ from django.contrib.flatpages.models import FlatPage
 from django.core.urlresolvers import reverse
 from tinymce.models import HTMLField
 from filebrowser.fields import FileBrowseField
-from taggit.managers import TaggableManager      
+from taggit.managers import TaggableManager
+from taggit.models import Tag
 import pytz, os
 
 
@@ -141,6 +142,17 @@ class Post(Content):
         ordering = ['-created',]
     
     projects    = ManyToManyField(Project, blank=True, null=True)
+
+
+class TagBag(Base):
+    name = CharField(max_length=140, null=False, blank=False)
+    tags = ManyToManyField(Tag, through='OrderedTag', blank=True)
+    
+    
+class OrderedTag(Base):
+    tagbag    = ForeignKey(TagBag)
+    tag       = ForeignKey(Tag)
+    position  = PositiveSmallIntegerField(default=0)
 
 
 # signals are separated to signals.py 

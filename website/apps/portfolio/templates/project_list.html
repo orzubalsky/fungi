@@ -1,4 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
+{% for tag in navigation_tagbag.tags.all %}
+    <a href="tag_{{ tag.name }}">{{ tag.name }}</a>
+{% endfor %}
 {% endblock %}

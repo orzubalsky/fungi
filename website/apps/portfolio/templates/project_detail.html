@@ -5,13 +5,39 @@
 {% block title %}{{ block.super|title }} -- {{ project.name|title }}{% endblock title %}
 
 {% block content %}
-
-{% if project.is_displayed %}
-{% render_project project %}
+<div id="gallery">
+    <img src="{{ STATIC_URL }}images/2_threadscopy-copy.jpg">
+</div>
+<div id="gallery-nav">
+    back   forth
+    </div>
+<div id="post-title">
+    <h2>{{ project.name }}</h2>
+    <p>
+        {{ project.medium }}, {{ project.project_time }}.<br />
+        {{ project.material }}<br />
+        {{ project.dimensions }}
+    </p>
+</div>
+<div id ="post-content">
+    {{ project.content|safe }}
+</div>
+{% if project.related_projects.all %}
+<div id ="related-posts">
+    <h3>correlated with:</h3>
+    {% for related_project in project.related_projects.all %}
+    <a href="">{{ related_project.name }}</a>
+    {% endfor %}
+</div> 
 {% endif %}
 
-{% for sub_project in project.project_set.all  %}
-{% render_project sub_project %}
-{% endfor %}
-
 {% endblock content %}
+
+
+{% block navigation %}
+<div id="navigation">
+    <a href="">home</a><br />
+    <a href="">statement</a><br />
+    <a href="">bio & contact</a><br />
+</div>
+{% endblock navigation %}

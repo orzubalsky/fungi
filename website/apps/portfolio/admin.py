@@ -15,6 +15,16 @@ class BaseAdmin(admin.ModelAdmin):
     pass
 
 
+class OrderedTagInline(admin.TabularInline):
+    """
+    """
+    model           = OrderedTag
+    fields          = ('tag', 'position')
+    extra           = 0
+    sortable_field_name = 'position'
+    
+
+
 class ProjectAdmin(BaseAdmin):
     """
     """
@@ -55,6 +65,21 @@ class PostAdmin(BaseAdmin):
     prepopulated_fields = {'slug': ('name',)}
              
 
+class OrderedTagAdmin(BaseAdmin):
+    """
+    """
+    list_display        = ('tag', 'position') 
+    list_editable       = ('position',)    
+
+
+class TagBagAdmin(BaseAdmin):
+    """
+    """
+    list_display        = ('name', 'is_active') 
+    list_editable       = ('is_active',)    
+    inlines             = (OrderedTagInline,)
+    
+
 
 # register admin models
 admin.site.register(Image)
@@ -63,5 +88,7 @@ admin.site.register(Document)
 admin.site.register(Video)
 admin.site.register(Vimeo)
 admin.site.register(Group)
+admin.site.register(OrderedTag, OrderedTagAdmin)
+admin.site.register(TagBag, TagBagAdmin)
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Post, PostAdmin)
