@@ -1,0 +1,15 @@
+<div class="slideshow">
+    {% for vimeo in project.vimeos.all %}
+        <div class="item">{{ vimeo.media|safe }}</div>
+    {% endfor %}
+    {% for image in project.images.all %}
+        <div class="item"><img src="{{ image.media.url }}" alt="{{ project.name }}: {{ image.media.name }}" /></div>
+    {% endfor %}
+    {% if project.gallery_items_count > 1 %}
+    <div class="controls">
+        {% url 'project-detail' slug=project.slug as project_url %}                
+        <a class="back" href="{{ project_url }}">back</a>
+        <a class="next" href="{{ project_url }}">forth</a>
+    </div>
+    {% endif %}            
+</div>

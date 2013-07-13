@@ -50,28 +50,40 @@ strong {
     background-color: transparent;
 }
 .gallery {
+    margin-bottom:32px;    
+}
+.slideshow {
     width: 800px;   
-    margin-bottom:32px;
     position: relative;
     height: 500px;
 }
-.gallery .item {
+.slideshow .item {
     display: none;
     position: relative;
     overflow: hidden;
     height: 100%;
     width: 800px;
 }
-.gallery .item img {
+.slideshow .item img {
     width: 100%;
     position: absolute;
 }
-.gallery .controls a {
+.slideshow .controls a {
     border-bottom: none;
 }
-.gallery .controls {
+.slideshow .controls {
     width:800px;
     text-align:right;
+}
+.gallery .list {
+    
+}
+.gallery .list .item {
+    width: 800px;
+    
+}
+.gallery .list img {
+    width: 800px;
 }
 
 #content {

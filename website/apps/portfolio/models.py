@@ -122,6 +122,12 @@ class Project(Content):
     """
     class Meta:
         ordering = ['position',]
+    
+    GALLERY_CHOICES = (
+                        ('slideshow', 'Slideshow'),
+                        ('list', 'List'),
+                        ('thumbnails', 'Thumbnails')
+                    )
 
     position         = PositiveSmallIntegerField(default=0)
     project_time     = CharField(max_length=140, blank=True, null=True) 
@@ -133,6 +139,7 @@ class Project(Content):
     groups           = ManyToManyField(Group, blank=True, null=True)
     tags             = TaggableManager(blank=True)
     related_projects = ManyToManyField('self', blank=True, null=True)
+    gallery_style    = CharField(max_length=20, choices=GALLERY_CHOICES, default='slideshow')
     
     def tag_class_list(self):
         return " ".join(["%s" % (t.name) for t in self.tags.all()])
