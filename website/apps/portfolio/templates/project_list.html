@@ -9,7 +9,7 @@
 {% block content %}
 <div id="project_list">
 {% for project in projects %}
-    <a href="{% url 'project-detail' slug=project.slug %}" class="{{ project.tag_class_list }}">{{ project.name }}</a>
+    <a href="{% url 'project-detail' slug=project.slug %}" class="{{ project.tag_class_list }}">{{ project.name|safe }}</a>
 {% endfor %}
 </div>
 {% endblock content %}
