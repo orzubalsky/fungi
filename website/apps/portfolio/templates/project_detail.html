@@ -1,4 +1,4 @@
-    {% extends "base.html" %}
+{% extends "base.html" %}
 
 {% load render_project_gallery %}
 
@@ -25,7 +25,7 @@
 <div id ="related-posts">
     <h3>correlated with:</h3>
     {% for related_project in project.related_projects.all %}
-    <a href="">{{ related_project.name }}</a>
+    <a href="{{ related_project.slug }}">{{ related_project.name }}</a>
     {% endfor %}
 </div> 
 {% endif %}
@@ -34,9 +34,5 @@
 
 
 {% block navigation %}
-<div id="navigation">
-    <a href="{% url 'project-list' %}">home</a><br />
-    <a href="{% url 'statement' %}">statement</a><br />
-    <a href="{% url 'bio' %}">bio & contact</a><br />
-</div>
+{{ block.super }}
 {% endblock navigation %}

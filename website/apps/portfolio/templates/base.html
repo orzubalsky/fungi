@@ -35,14 +35,20 @@
             {% block tag_navigation %}
             {% endblock %}
             </div>
-
+<br/><br/><br/><br/><br/>
            <div id="content">
                {% block content %}
                 {% endblock content %}
             </div>
-            
+
             {% block navigation %}
-            {% endblock navigation %}            
+			<div id="navigation">
+				<a href="{% url 'project-list' %}">home</a><br />
+				<a href="{% url 'statement' %}">statement</a><br />
+				<a href="{% url 'bio' %}">bio & contact</a><br />
+			</div>            
+            {% endblock navigation %} 
+
         </div>        
     </div>
     <script type="text/javascript" src="{{ STATIC_URL }}js/lib/jquery.js"></script>	

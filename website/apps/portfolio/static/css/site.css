@@ -11,6 +11,12 @@ a, a:visited {
     color: black;
     text-decoration: none;
     font-weight:bold;
+    padding-right:75px;
+    padding-left:100px;
+line-height:400%;
+
+
+    
 }
 a:hover {
     text-decoration:line-through;
@@ -43,7 +49,7 @@ strong {
     color: black;
 }
 #container {
-    width: 800px;
+    width: 900px;
     height: auto;
     margin: 32px 32px;
     background-color: transparent;
@@ -54,21 +60,27 @@ strong {
 .slideshow {
     width: 800px;   
     position: relative;
-    height: 500px;
+    height:600px;
+        bottom:0px;
 }
 .slideshow .item {
     display: none;
     position: relative;
     overflow: hidden;
-    height: 100%;
     width: 800px;
+    height:100%;
+
 }
 .slideshow .item img {
     width: 100%;
     position: absolute;
+    bottom:0;
 }
 .slideshow .controls a {
     border-bottom: none;
+ padding: 0 0 0 0;
+ position:inherit;
+
 }
 .slideshow .controls {
     width:800px;
@@ -96,26 +108,36 @@ strong {
     height: 100%;
 }
 #content {
-    width:800px;
+    width:1200px;
     text-align:left;
 }
 
 #post-title {
     text-align:left;
+    margin-top:30px;
+     margin-right:30px;
     width: 400px;
-    height:300px;
+    height:500px;
     float:left;
     clear: both;
+    
 }
 
 #post-content p {
     text-align:left;
-    width: 400px;
+    margin-top:30px;
+    width: 600px;
     float:left;
 }
 
+#post-content a {
+        padding: 0 0 0 0;
+    line-height:100%;
+
+}
+
 #related-posts {
-    width:400px;
+    width:600px;
     float:left;
     margin: 0 0 100px;
 }
@@ -125,7 +147,11 @@ strong {
     text-decoration:none;
     font-weight:normal;
     text-align:left;
-    width:200px;
+    width:300px;
+     padding: 0 0 0 0;
+         line-height:100%;
+
+
 }
 
 #related-posts a:hover {
@@ -135,7 +161,9 @@ strong {
 
 
 #header {
-    margin: 0 0 32px 0;
+    margin: 0 0 70px 0;
+                     padding: 0 0 0 0;
+
 
 }
 h1 {
@@ -143,9 +171,14 @@ h1 {
     text-transform:uppercase;
     font-weight: bold;
     display: inline;
+
 }
 #header a {
     color: black;
+                     padding: 0 0 0 0;
+
+
+
     
 }
 h1 a span {
@@ -163,12 +196,23 @@ h3 {
     font-size:10pt;
     margin-bottom:2px;
 }
+
+#tag_navigation a {
+line-height:100%;
+}
 #navigation {
     clear: both;
-    
+    padding: 0 0 0 0;
+    line-height:100%;
+
 }
 #navigation a {
+     padding: 0 0 0 0;
+         line-height:100%;
+
 }
 a.highlight {
     text-transform: uppercase;
+    font-size:11pt;
+    text-decoration:underline;
 }
