@@ -1,7 +1,7 @@
 from fabric.api import env, task, sudo, prompt, cd, put, puts
 from fabric.contrib.files import upload_template
 
-env.hosts = [ '198.199.64.223', ]
+env.hosts = [ '184.172.15.233', ]
 
 #####
 #
@@ -11,27 +11,27 @@ env.hosts = [ '198.199.64.223', ]
 
 @task
 def update_sourcecode():
-    with cd('/home/theyoungest/webapps/portfolio_production/portfolio'):
-        sudo('git pull',user='orzubalsky')
+    with cd('/home/pnguye/webapps/portfolio_production/website'):
+        sudo('git pull',user='pnguye')
 
 @task
 def update_project_settings():
     filename = prompt( 'Enter name of local settings file:',
-                       default='orzubalsky/settings/server.py' )
-    destination = '/home/theyoungest/webapps/portfolio_production/portfolio/settings/server.py'
+                       default='website/settings/server.py' )
+    destination = '/home/pnguye/webapps/portfolio_production/website/settings/server.py'
     put(filename,destination,use_sudo=True)
-    sudo('chown theyoungest:webdev %s' % destination)
+    sudo('chown pnguye:webdev %s' % destination)
 
 @task
 def run_buildout():
-    with cd('/home/theyoungest/webapps/portfolio_production/portfolio/'):
-        sudo('./bin/buildout -c server.cfg',user='theyoungest')
+    with cd('/home/pnguye/webapps/portfolio_production/website/'):
+        sudo('./bin/buildout -c server.cfg',user='pnguye')
 
 @task
 def update_db():
-    with cd('/home/theyoungest/webapps/portfolio_production/portfolio/'):
-        sudo('./bin/django syncdb',user='theyoungest')
-        sudo('./bin/django migrate',user='theyoungest')
+    with cd('/home/pnguye/webapps/portfolio_production/website/'):
+        sudo('./bin/django syncdb',user='pnguye')
+        sudo('./bin/django migrate',user='pnguye')
     
 @task
 def update_static_files():
@@ -61,77 +61,3 @@ def deploy():
     update_db()
     update_static_files()
     restart_wsgi()
-
-
-#####
-#
-# tasks that would need to be done once for a given server.
-#
-#####
-
-@task
-def init_os_package_setup():
-    sudo('apt-get -y update')
-    sudo('apt-get -y upgrade')
-    sudo('apt-get install git python-dev libjpeg62 libjpeg-dev libfreetype6 libfreetype6-dev zlib1g-dev ffmpeg')
-    sudo('apt-get install postgresql-9.1 postgresql-server-dev-9.1')
-    sudo('apt-get install binutils libproj-dev gdal-bin libgeoip1 python-gdal python-psycopg2')
-    sudo('apt-get install postgresql-9.1-postgis')
-    sudo('apt-get install apache2 libapache2-mod-wsgi')
-
-@task
-def init_tradeschooler_user():
-    sudo('groupadd webdev')
-    sudo('useradd -G postgres,webdev --create-home --shell /bin/bash tradeschooler')
-    sudo('passwd tradeschooler')
-
-    sudo('ssh-keygen -t rsa -C "tradeschooler@tradeschool.coop"',user='tradeschooler')
-    puts('Created the following id_rsa.pub file for user tradeschooler:')
-    sudo('cat /home/tradeschooler/.ssh/id_rsa.pub')
-    prompt('Please upload this to github as a "deploy key" (https://github.com/orzubalsky/tradeschool/settings/keys).\n' \
-               'When done, press enter to continue.')
-
-@task
-def init_project_sourcecode():
-    sudo('mkdir --parents /opt/projects/ts')
-    sudo('chown urtbot:webdev /opt/projects/ts')
-    with cd('/opt/projects/ts'):
-        sudo('git clone git@github.com:orzubalsky/tradeschool.git .',user='tradeschooler')
-
-@task
-def init_buildout():
-    with cd('/opt/projects/ts'):
-        sudo('python bootstrap.py -c server.cfg',user='tradeschooler')
-
-@task
-def init_postgres_db():
-    sudo('chown postgres /opt/projects/urt/trunk/urt/etc/sh/*')
-    sudo('chmod u+x /opt/projects/urt/trunk/urt/etc/sh/*')
-    sudo('/opt/projects/ts/etc/sh/create_template_postgis-debian.sh',user='postgres')
-    sudo('createuser tradeschooler',user='postgres')
-    sudo('createdb --template=template_postgis --owner=tradeschooler tradeschool',user='postgres')
-
-@task
-def init_apache():
-    filename = prompt( 'Enter name of local apache conf file:',
-                       default='ts/etc/conf/apache.conf' )
-    destination = '/etc/apache2/sites-available/tradeschool.coop'
-    put(filename,destination,use_sudo=True)
-
-    sudo('a2ensite tradeschool.coop')
-    sudo('service apache2 reload') # do we need this line??
-
-@task
-def initialize_everything():
-    init_os_package_setup()
-    init_tradeschooler_user()
-    init_project_sourcecode()
-    update_project_settings()
-    init_buildout()
-    run_buildout()
-
-    init_postgres_db()
-    update_db()
-
-    init_apache()
-

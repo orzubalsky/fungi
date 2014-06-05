@@ -12,4 +12,12 @@
     <a href="{% url 'project-detail' slug=project.slug %}" class="{{ project.tag_class_list }}">{{ project.name|safe }}</a>
 {% endfor %}
 </div>
+
+<div id="experiment_list">
+{% for experiment in experiments %}
+<h1>@@@@</h1>
+    <a href="{% url 'experiment-detail' slug=experiment.slug %}" class="{{ experiment.tag_class_list }}">{{ experiment.name|safe }}</a>
+{% endfor %}
+</div>
+
 {% endblock content %}

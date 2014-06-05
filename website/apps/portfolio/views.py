@@ -27,10 +27,25 @@ class ProjectDetail(DetailView):
     template_name = 'project_detail.html'
 
 
+class ExperimentDetail(DetailView):
+    """
+    """
+    model = Experiment
+    template_name = 'experiment_detail.html'
+
+
 class ProjectList(ListView):
     """
     """
+    def get_context_data(self, **kwargs):
+            # Call the base implementation first to get a context
+            context = super(ProjectList, self).get_context_data(**kwargs)
+            context['experiments'] = Experiment.objects.all()
+
+            return context
+
     queryset = Project.objects.filter(is_active=True)
+    print queryset
     template_name = 'project_list.html'
 
 

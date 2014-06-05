@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}{{ block.super|title }} ⊿ {{ project.name|title }}{% endblock title %}
+
+{% block content %}
+{{ project.content }}
+{% endblock content %}
+
+
+{% block navigation %}
+{{ block.super }}
+{% endblock navigation %}

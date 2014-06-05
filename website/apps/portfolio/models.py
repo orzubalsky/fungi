@@ -145,6 +145,16 @@ class Project(Content):
         return " ".join(["%s" % (t.name) for t in self.tags.all()])
 
 
+class Experiment(Base):
+    """
+    """
+    name         = CharField(max_length=140)
+    content      = HTMLField(null=True, blank=True)
+    slug         = SlugField(max_length=160)
+    source_link  = URLField(blank=True, null=True)
+    tags         = TaggableManager(blank=True)
+
+
 class Post(Content):
     """
     """

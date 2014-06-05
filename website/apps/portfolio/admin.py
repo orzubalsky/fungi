@@ -49,6 +49,12 @@ class ProjectAdmin(BaseAdmin):
     prepopulated_fields = {'slug': ('name',)}
 
 
+class ExperimentAdmin(BaseAdmin):
+    """
+    """
+    prepopulated_fields = {'slug': ('name',)}
+
+
 class PostAdmin(BaseAdmin):
     """
     """
@@ -91,4 +97,5 @@ admin.site.register(Group)
 admin.site.register(OrderedTag, OrderedTagAdmin)
 admin.site.register(TagBag, TagBagAdmin)
 admin.site.register(Project, ProjectAdmin)
+admin.site.register(Experiment, ExperimentAdmin)
 admin.site.register(Post, PostAdmin)
