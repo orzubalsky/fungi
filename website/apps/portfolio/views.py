@@ -34,19 +34,16 @@ class ExperimentDetail(DetailView):
     template_name = 'experiment_detail.html'
 
 
-class ProjectList(ListView):
+def project_list(request):
     """
     """
-    def get_context_data(self, **kwargs):
-            # Call the base implementation first to get a context
-            context = super(ProjectList, self).get_context_data(**kwargs)
-            context['experiments'] = Experiment.objects.all()
+    projects = Project.objects.filter(is_active=True)
+    experiments = Experiment.objects.filter(is_active=True)
 
-            return context
-
-    queryset = Project.objects.filter(is_active=True)
-    print queryset
-    template_name = 'project_list.html'
+    return render_to_response('project_list.html', {
+        'projects': projects,
+        'experiments': experiments,
+    }, context_instance=RequestContext(request))
 
 
 def tagged_projects(request, slug=None):

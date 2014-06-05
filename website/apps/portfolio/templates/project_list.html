@@ -15,7 +15,6 @@
 
 <div id="experiment_list">
 {% for experiment in experiments %}
-<h1>@@@@</h1>
     <a href="{% url 'experiment-detail' slug=experiment.slug %}" class="{{ experiment.tag_class_list }}">{{ experiment.name|safe }}</a>
 {% endfor %}
 </div>
